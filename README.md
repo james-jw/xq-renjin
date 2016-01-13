@@ -10,8 +10,7 @@ let $makeModel := $r('function (exp, d) { lm(exp, d) }')
 let $model := $makeModel('x ~ y', $data)
 return map {
    'intercept': $model?coefficients?1, 
-   'slope': $model?coefficients?2,
-   'model': $model('x ~ y')
+   'slope': $model?coefficients?2
 }  
 ```
 
