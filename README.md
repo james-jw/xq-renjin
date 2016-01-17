@@ -46,7 +46,7 @@ The module provides a few helper methods for interacting with R objects.
 #### Init
 
 ```xquery
-init() as function(xs:string)
+init(exp xs:string?) as function(xs:string)
 ```
 
 The `init` method constructs a new R engine object for use in executing future R code.
@@ -58,12 +58,20 @@ return
    $r
 ```
 
-If you examine the result of the above expression. You should see that it is a function which accepts a single argument.
+Additionally, an R expression can be passed in during the initialization
+```xquery
+let $r := r:init("a <- (1:20)")
+return
+  $r
+
+In the above example, not only was en engine object initalized and returned, but the variable a was added to the engine context.
+
+The returned engine object is a function which accepts a single argument. 
 ```xquery
 function rEngine#1
 ```
 
-An R expression can be passed in to evalute further `R` code or retrieve an engine value, for example:
+By passing in an R expression, further `R` code can be executed, or objects retrieved. For example:
 
 ```xquery
 let $r := r:init()
@@ -71,7 +79,7 @@ return
   $r('(1:20)')
 ```
 
-The result of the above expression should an XQuery sequence from 1 to 20
+The result of the above expression should be: `1 2 3 4 5 ...`
 
 #### Run
 ```xquery
@@ -114,12 +122,17 @@ function items. For example, its possible to pass XQuery functions into R functi
 let $data-frame := $r('df')
 let $model := $r('function (exp, data) { lm(exp, data)')
 let $summary := $r('summary')
-return
+let $m := 
   $model('a ~ log(b)', $data-frame)
     => $summary() 
+    => as-map()
+return map {
+    "intercept": $m?coefficients("(Intercept)")("Estimate")
+    "slope": $m?coefficients("(Intercept)")("Std. Error")
+}
 ```
 
-Note: R's data model does not perfectly map too XQuery's. In some cases R objects will need to be manually unwrapped using the `as-map` function discussed below. 
+Note: R's data model does not perfectly map too XQuery's. In some cases R objects will need to be manually unwrapped using the `as-map` function described next, or by simply by caling the R object as a function with the name of the attribute, column, or row to retrieve. This can be seen in the above example.
 
 #### as-map
 ```xquery
