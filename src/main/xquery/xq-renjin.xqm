@@ -1,4 +1,4 @@
-module namespace renjin = 'http://xq-renjin';
+module namespace renjin = 'http://github.com/james-jw/xq-renjin';
 import module namespace r = 'org.jw.basex.renjin.xq-renjin-module'; 
 
 (: Provided an R object, returns a map to traverse the object :)
