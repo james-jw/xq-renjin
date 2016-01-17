@@ -21,7 +21,12 @@ declare function renjin:map($item) {(
 };
 
 (: Initializes an R engine :)
-declare function renjin:init() as function(*) { r:init() };
+declare function renjin:init() as function(*) as function(*) { r:init() };
+
+(: Initializes an R engine and runs an initial expression :)
+declare function renjin:init($exp as xs:string) as function(*) {
+    r:init() => r:run($exp)
+};
 
 (: Returns whether an object represents an R object or not. :)
 declare function renjin:is($item) as xs:boolean { r:is-r($item) };
