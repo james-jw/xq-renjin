@@ -1,6 +1,6 @@
 # xq-renjin
 
-R integration for XQuery 3.1 and BaseX leveraging the [renjin][3] JVM R interpreter.
+R integration for XQuery 3.1 and BaseX leveraging the [Renjin][3] JVM R interpreter.
 
 ## Why?
 
@@ -11,7 +11,7 @@ shame to not use in your next XQuery project.
 ## Installation
 Copy the ``xq-renjin-x.jar`` into your ``basex\lib`` directory 
 
-Or use [xqpm][3] to do it for you:
+Or use [xqpm][1] to do it for you:
 ```
 xqpm xq-renjin
 ```
@@ -63,6 +63,7 @@ Additionally, an R expression can be passed in during the initialization
 let $r := r:init("a <- (1:20)")
 return
   $r
+```
 
 In the above example, not only was en engine object initalized and returned, but the variable a was added to the engine context.
 
@@ -196,4 +197,4 @@ If you like what you see here please star the repo and follow me on [github][1] 
 [0]: http://www.basex.org
 [1]: https://github.com/james-jw/xqpm
 [2]: https://www.linkedin.com/pub/james-wright/61/25a/101
-[3]: http://www.renjin.org/
+[3]: http://www.renjin.org
