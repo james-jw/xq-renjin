@@ -95,7 +95,7 @@ return
 In order to provide a seamless scripting experience, all R objects are often automatically
 mapped to XQuery maps or arrays if applicable. This allows for the use of the `?` operator when querying objects or arrays. 
 
-So in the above example, you could access the a column like so:
+If you expand on the above example, you could access the `a` column with the following:
 
 ```xquery
 ...
@@ -104,7 +104,7 @@ return
   $data-frame?a
 ```
 
-Which should print out the sequence from 1 to 20. It should be noted however, that R's data model does not perfectly match XQuery's. In these cases the object will need to be manually unwrapped using the `as-map` function discussed below.
+The output from the above query should be a sequence from 1 to 20. 
 
 Additionlly, script objects and XQuery objects are interchangable, including
 function items. For example, its possible to pass XQuery functions into R functions and vice versa:
@@ -118,6 +118,8 @@ return
   $model('a ~ log(b)', $data-frame)
     => $summary() 
 ```
+
+Note: R's data model does not perfectly map too XQuery's. In some cases R objects will need to be manually unwrapped using the `as-map` function discussed below. 
 
 #### as-map
 ```xquery
