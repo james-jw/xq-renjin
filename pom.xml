@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.jw.basex</groupId>
+  <artifactId>xq-renjin</artifactId>
+  <version>0.1-Beta</version>
+  <packaging>jar</packaging>
+  
+  <name>xq-renjin</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>bedatadriven</id>
+      <name>bedatadriven public repo</name>
+      <url>https://nexus.bedatadriven.com/content/groups/public/</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.basex</groupId>
+      <artifactId>basex-parent</artifactId>
+      <version>8.3.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/BaseX831.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>org.renjin</groupId>
+      <artifactId>renjin-script-engine</artifactId>
+      <version>0.7.0-RC7</version>
+    </dependency>
+  </dependencies>
+  
+  <organization>
+  	<name>James Wright</name>
+  	<url>https://www.linkedin.com/pub/james-wright/61/25a/101</url>
+  </organization>
+
+  <description>Renjin scripting integration for use with BaseX and XQuery 3.1</description>
+</project>
