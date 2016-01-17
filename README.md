@@ -60,7 +60,7 @@ return
 
 If you examine the result of the above expression. You should see that it is a function which accepts a single argument.
 ```xquery
-function rObject#1
+function rEngine#1
 ```
 
 An R expression can be passed in to evalute further `R` code or retrieve an engine value, for example:
@@ -92,8 +92,8 @@ return
   $r('df')
 ```
 
-In order to provide a seamless scripting experience, all R objects are automatically
-mapped to XQuery objects. This allows for the use of the `?` operator when querying objects or arrays:
+In order to provide a seamless scripting experience, all R objects are often automatically
+mapped to XQuery maps or arrays if applicable. This allows for the use of the `?` operator when querying objects or arrays. 
 
 So in the above example, you could access the a column like so:
 
@@ -104,7 +104,7 @@ return
   $data-frame?a
 ```
 
-Which should print out the sequence from 1 to 20
+Which should print out the sequence from 1 to 20. It should be noted however, that R's data model does not perfectly match XQuery's. In these cases the object will need to be manually unwrapped using the `as-map` function discussed below.
 
 Additionlly, script objects and XQuery objects are interchangable, including
 function items. For example, its possible to pass XQuery functions into R functions and vice versa:
@@ -118,6 +118,34 @@ return
   $model('a ~ log(b)', $data-frame)
     => $summary() 
 ```
+
+#### as-map
+```xquery
+as-map(rObject) as item()*
+```
+
+The function as-map will convert any R object and convert it to a map for further inspection. This is useful for function items
+and other complex data types which cannot be easily mapped to a single XQuery data type.
+
+If the evaluation of an expression results in `function rObject#1` the use of this function may be beneficial to better understand the resulting object.
+
+#### names
+```xquery
+names(rObject) as xs:string*
+```
+Returns the column names of an R Object
+
+#### rownames
+```xquery
+names(rObject) as xs:string*
+```
+Returns the row names of an R Object
+
+#### is
+```xquery
+is(rObject) as xs:boolean
+```
+Denotes if an object is an R object
 
 #### eval
 ```xquery
