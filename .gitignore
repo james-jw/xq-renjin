@@ -1,1 +1,5 @@
-/target/
+/target/classes/
+/target/maven-archiver/
+.classpath
+.project
+.settings/
